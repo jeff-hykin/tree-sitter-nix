@@ -6,4 +6,5 @@ import binaryStringForTreeSitterNixWasm from "./tree-sitter-nix.wasm.binaryified
 const uint8ArrayForTreeSitterNixWasm = stringToBytes(binaryStringForTreeSitterNixWasm)
 
 const parser = await parserFromWasm(uint8ArrayForTreeSitterNixWasm)
-export const parse = parser.parse
+export const parse = (...args)=>parser.parse(...args)
+export const parseFile = (path)=>Deno.readTextFile(path).then(text=>parser.parse(text))
